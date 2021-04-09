@@ -8,14 +8,14 @@ static inline void bpf_sock_ops_ipv4(struct bpf_sock_ops *skops)
 {
 	struct sock_key key = {};
 	sk_extract4_key(skops, &key);
-	if (key.dip4 == 16777343 || key.sip4 == 16777343 ) {
+	//if (key.dip4 == 16777343 || key.sip4 == 16777343 ) {
 		if (key.dport == 4135 || key.sport == 4135) {
 			int ret = sock_hash_update(skops, &sock_ops_map, &key, BPF_NOEXIST);
 			printk("<<< ipv4 op = %d, port %d --> %d\n", skops->op, key.sport, key.dport);
 			if (ret != 0)
 				printk("*** FAILED %d ***\n", ret);
 		}
-	}
+	//}
 }
 
 static inline void bpf_sock_ops_ipv6(struct bpf_sock_ops *skops)
