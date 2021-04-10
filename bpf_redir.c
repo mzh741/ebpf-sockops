@@ -19,6 +19,7 @@ int bpf_redir(struct sk_msg_md *msg)
 		if (key.sport == 4135 || key.dport == 4135) {
 			//int len1 = (__u64)msg->data_end - (__u64)msg->data;
 	                //printk("<<< redir_proxy port %d --> %d (%d)\n", key.sport, key.dport, len1);
+			printk("port:%d", bpf_ntohl(key.dport));
 			msg_redirect_hash(msg, &sock_ops_map, &key, flags);
 		}
 	//}
